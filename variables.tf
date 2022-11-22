@@ -48,5 +48,22 @@ variable "users" {
       actions     = list(string)
       resources   = list(string)
     })
+    user_groups_ids = list(string)
+  }))
+}
+
+# Groups
+
+variable "users_groups" {
+  type = list(object({
+    id          = string
+    name        = string
+    description = string
+    policies = object({
+      name        = string
+      description = string
+      actions     = list(string)
+      resources   = list(string)
+    })
   }))
 }

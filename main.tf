@@ -28,3 +28,14 @@ module "users" {
 output "users" {
   value = module.users
 }
+
+
+module "groups" {
+  source    = "./groups"
+  users = var.users
+  users_groups = var.users_groups
+}
+
+output "groups" {
+  value = module.groups
+}

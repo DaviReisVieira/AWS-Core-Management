@@ -48,3 +48,19 @@ AWS Core Management with Terraform
   }
 }
 ```
+
+- Group
+
+```json
+{
+  "id": "ug-0a1b2c3d",
+  "name": "davirvsGroups1",
+  "description": "davirvsGroups1 description",
+  "policies": {
+    "name": "davirvsGroups1Restrictions",
+    "description": "Estas são as restrições do grupo de usuários davirvsGroups1",
+    "actions": ["ec2:DescribeInstances", "ec2:DescribeSecurityGroups"],
+    "resources": ["*"]
+  }
+}
+```
