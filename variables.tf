@@ -37,3 +37,16 @@ variable "instances" {
     region              = string
   }))
 }
+
+# Users
+variable "users" {
+  type = list(object({
+    name       = string
+    policies = object({
+      name        = string
+      description = string      
+      actions     = list(string)
+      resources   = list(string)
+    })
+  }))
+}

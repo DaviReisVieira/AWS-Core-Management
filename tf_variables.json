@@ -23,5 +23,16 @@
       "security_groups_ids": ["sg-0a1b2c3d"],
       "region": "us-east-1a"
     }
+  ],
+  "users": [
+    {
+      "name": "davirvsTeste1",
+      "policies": {
+        "name": "davirvsTeste1Restrictions",
+        "description": "Estas são as restrições do usuário davirvsTeste1",
+        "actions": ["ec2:DescribeInstances", "ec2:DescribeSecurityGroups"],
+        "resources": ["*"]
+      }
+    }
   ]
 }

@@ -34,3 +34,17 @@ AWS Core Management with Terraform
   "region": "us-east-1a"
 }
 ```
+
+- User
+
+```json
+{
+  "name": "davirvsTeste1",
+  "policies": {
+    "name": "davirvsTeste1Restrictions",
+    "description": "Estas são as restrições do usuário davirvsTeste1",
+    "actions": ["ec2:DescribeInstances", "ec2:DescribeSecurityGroups"],
+    "resources": ["*"]
+  }
+}
+```
