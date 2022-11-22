@@ -11,6 +11,7 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+# Network
 variable "security_groups" {
   type = list(object({
     id          = string
@@ -23,5 +24,16 @@ variable "security_groups" {
       protocol    = string
       cidr_blocks = list(string)
     }))
+  }))
+}
+
+# Instances
+variable "instances" {
+  type = list(object({
+    name                = string
+    ami                 = string
+    instance_type       = string
+    security_groups_ids = list(string)
+    region              = string
   }))
 }

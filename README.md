@@ -22,3 +22,15 @@ AWS Core Management with Terraform
   ]
 }
 ```
+
+- EC2
+
+```json
+{
+  "name": "davirvs1_ubuntu2204",
+  "ami": "ami-08c40ec9ead489470",
+  "instance_type": "t2.micro",
+  "security_groups_ids": ["sg-0a1b2c3d"],
+  "region": "us-east-1a"
+}
+```

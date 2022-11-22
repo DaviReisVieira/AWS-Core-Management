@@ -7,3 +7,14 @@ module "network" {
 output "network" {
   value = module.network
 }
+
+module "instances" {
+  source        = "./instances"
+  public_subnet = module.network.public_subnet
+  security_groups = module.network.security_groups
+  instances = var.instances
+}
+
+output "instances" {
+  value = module.instances
+}
