@@ -10,7 +10,6 @@ class TerraformClass:
         self.aws_secret_key = aws_secret_key
         self.terraform_path = "../terraform"
         self.json_list_variables = json.loads(json_list_variables) if type(json_list_variables) == str else json_list_variables
-
     
 
     def init(self):

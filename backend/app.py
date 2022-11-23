@@ -116,7 +116,7 @@ def login():
     username = req.get('username', None)
     password = req.get('password', None)
     user = guard.authenticate(username, password)
-    ret = {'access_token': guard.encode_jwt_token(user)}
+    ret = {'access_token': guard.encode_jwt_token(user,username=username)}
     return ret, 200
 
 
@@ -339,9 +339,9 @@ def get_terraform_configs():
 
 
 # get TerraformConfig by id
-@app.route('/api/get-terraform-config/<id>', methods=['GET'])
+@app.route('/api/get-terraform-config/<region_name>', methods=['GET'])
 @flask_praetorian.auth_required
-def get_terraform_config(id):
+def get_terraform_config(region_name):
     """
     Gets a TerraformConfig by id.
     .. example::
@@ -350,7 +350,8 @@ def get_terraform_config(id):
     """
     user_id = flask_praetorian.current_user().id
 
-    terraform_config = TerraformConfig.query.filter_by(user_id=user_id, id=id).first()
+    print(user_id,region_name)
+    terraform_config = TerraformConfig.query.filter_by(user_id=user_id, region=region_name).first()
     return {'id': terraform_config.id, 'user_id': terraform_config.user_id, 'region': terraform_config.region, 'json_config': terraform_config.json_config}, 200
 
 
