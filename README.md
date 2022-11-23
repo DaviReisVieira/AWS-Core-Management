@@ -64,3 +64,15 @@ AWS Core Management with Terraform
   }
 }
 ```
+
+## Format os JSON variable file
+
+```json
+{
+  "aws-region": "us-east-2",
+  "security_groups": [],
+  "instances": [],
+  "users": [],
+  "users_groups": []
+}
+```
