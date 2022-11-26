@@ -1,39 +1,41 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { parseCookies } from "nookies";
-import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { useState } from "react";
+import MenuBox from "../components/MenuBox";
+import { api } from "../services/api";
 
-import styles from "../styles/pages/Index.module.css";
+import styles from "../styles/pages/Register.module.css";
 
-export default function Home() {
-  const { signIn } = useContext(AuthContext);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function Configurations() {
   const [message, setMessage] = useState("");
+  const [aws_access_key_id, setAws_access_key_id] = useState("");
+  const [aws_secret_access_key, setAws_secret_access_key] = useState("");
 
-  async function handleSignIn(e: any) {
+  async function updateAWSCredentials(e: any) {
     e.preventDefault();
 
-    const data = {
-      username: username,
-      password: password,
-    };
+    try {
+      const response = await api.post("update-aws-credentials", {
+        aws_access_key_id: aws_access_key_id,
+        aws_secret_key: aws_secret_access_key,
+      });
 
-    const signInMessage = await signIn(data);
+      setMessage(response.data.message);
 
-    if (signInMessage) {
-      setMessage(signInMessage.data.message);
+      setAws_access_key_id("");
+      setAws_secret_access_key("");
+    } catch (error) {
+      console.log(error);
     }
   }
 
   function eye(): { x: number; y: number } {
-    let length = username.length;
+    let length = aws_access_key_id.length;
     let x = 20;
     let y = 0;
 
-    if (password.length > 0) {
+    if (aws_secret_access_key.length > 0) {
       return { x: 200, y: 200 };
     }
 
@@ -52,7 +54,7 @@ export default function Home() {
   }
 
   function facial(): { x: number; y: number } {
-    let length = username.length;
+    let length = aws_access_key_id.length;
     let x = 20;
     let y = -6;
 
@@ -73,15 +75,11 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>AWS Core Management</title>
-        <meta name="description" content="Manage your AWS Cloud" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Configurations - AWS Core Management</title>
       </Head>
-
+      <MenuBox currentPage={"Configurations"} />
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          AWS Core <a>Management</a>
-        </h1>
+        <h1 className={styles.title}>Update Credentials</h1>
         <div className={styles.bear}>
           <div className={styles.head}>
             <div
@@ -110,42 +108,34 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <form onSubmit={handleSignIn} className={styles.forms}>
+        <form onSubmit={updateAWSCredentials} className={styles.forms}>
           <input
+            onChange={(e) => setAws_access_key_id(e.target.value)}
+            value={aws_access_key_id}
             type="text"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="AWS Access Key ID"
           />
           <input
+            onChange={(e) => setAws_secret_access_key(e.target.value)}
+            value={aws_secret_access_key}
             type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="AWS Secret Key"
           />
-          <button type="submit">Login</button>
+          <button type="submit">Update AWS Credentials</button>
         </form>
-        {message && <p className={styles.errorMessage}>{message}</p>}
-
-        <Link className={styles.registerButton} href={"/register"}>
-          Register Now
-        </Link>
+        {message && <p>{message}</p>}
       </main>
-
-      <footer className={styles.footer}>
-        <a target={"_blank"} href="https://davirvs.com.br" rel="noreferrer">
-          Powered by Davi Reis
-        </a>
-      </footer>
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { "awsCoreManagement.accessToken": accessToken } = parseCookies(ctx);
+  const { ["awsCoreManagement.accessToken"]: accessToken } = parseCookies(ctx);
 
-  if (accessToken) {
+  if (!accessToken) {
     return {
       redirect: {
-        destination: "/dashboard",
+        destination: "/",
         permanent: false,
       },
     };

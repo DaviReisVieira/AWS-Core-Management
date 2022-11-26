@@ -47,7 +47,16 @@ class TerraformClass:
         print('[Terraform] Destroying terraform')
         self.set_terraform_path()
         os.system('terraform workspace select ' + self.workspace)
-        os.system('terraform destroy -var aws_access_key=' + self.aws_access_key_id + ' -var aws_secret_key=' + self.aws_secret_key + '-auto-approve')
+
+        with open('variables.json', 'w') as outfile:
+            json.dump(self.json_list_variables, outfile)
+
+        os.system('terraform destroy -var-file=variables.json -var aws_access_key=' + self.aws_access_key_id + ' -var aws_secret_key=' + self.aws_secret_key + ' -auto-approve')
+        os.remove('variables.json')
+
+        os.system('terraform workspace select default')
+        os.system('terraform workspace delete ' + self.workspace)
+
         print('[Terraform] Terraform destroyed')
 
 

@@ -19,14 +19,16 @@ interface InstancesProps {
   region: string;
 }
 
+interface PoliciesProps {
+  name: string;
+  description: string;
+  actions: string[];
+  resources: string[];
+}
+
 interface UsersProps {
   name: string;
-  policies: {
-    name: string;
-    description: string;
-    actions: string[];
-    resources: string[];
-  };
+  policies: PoliciesProps;
   user_groups_ids: string[];
 }
 
@@ -34,12 +36,7 @@ interface UsersGroupsProps {
   id: string;
   name: string;
   description: string;
-  policies: {
-    name: string;
-    description: string;
-    actions: string[];
-    resources: string[];
-  };
+  policies: PoliciesProps;
 }
 
 interface RegionConfigProps {

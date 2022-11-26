@@ -13,16 +13,17 @@
   --white: #fff;
   --text: #000;
   --background: #fff;
-  --green-stone: #00a868;
-  --green-stone-rgb: 0, 168, 104;
-  --blue: #2069e9;
+  --aws-color: #232f3f;
+  --aws-color-rgb: 0, 168, 104;
+  --blue: #005277;
   --ice: #f6f6f6;
   --dark-ice: #ededed;
   --red: #e22c2c;
-  --yellow: #ffe600;
+  --yellow: #d0bf28;
   --green: #3aa845;
   --grey: #888888;
   --grey-white: #f6f6f6;
+  --orange: #d78b11;
 }
 
 @media (max-width: 1080px) {
@@ -71,13 +72,13 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--ice);
+  background: var(--aws-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--green-stone);
+  background: var(--blue);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--green);
+  background: var(--aws-color);
 }

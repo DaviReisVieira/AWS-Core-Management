@@ -13,6 +13,11 @@ interface SignInData {
   password: string;
 }
 
+interface RegisterData extends SignInData {
+  aws_access_key_id: string;
+  aws_secret_key: string;
+}
+
 export type User = {
   username: string;
 };
@@ -22,9 +27,9 @@ type AuthContextType = {
   setLoading: (loading: boolean) => void;
   user: User;
   isAuthenticated: boolean;
-  signIn: (data: SignInData) => Promise<void>;
+  signIn: (data: SignInData) => Promise<any>;
   logOut: () => Promise<void>;
-  registerUser: (data: SignInData) => Promise<any>;
+  registerUser: (data: RegisterData) => Promise<any>;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -92,11 +97,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  async function registerUser({ username, password }: SignInData) {
+  async function registerUser({
+    username,
+    password,
+    aws_secret_key,
+    aws_access_key_id,
+  }: RegisterData) {
     try {
       const response = await api.post("register", {
         username,
         password,
+        aws_secret_key,
+        aws_access_key_id,
       });
 
       return response;

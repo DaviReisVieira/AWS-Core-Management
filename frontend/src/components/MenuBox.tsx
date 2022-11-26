@@ -3,11 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { AuthContext, User } from "../contexts/AuthContext";
 
-import awsLogo from "../../public/vercel.svg";
+import awsLogo from "../../public/daviaws.svg";
 
-const navigation = [{ name: "Dashboard", href: "/dashboard", admin: false }];
-
-const profile = [{ name: "Configurações", href: "/configurations" }];
+import styles from "../styles/components/MenuBox.module.css";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -20,16 +18,12 @@ interface MenuBoxProps {
 const navLinks = [
   { name: "Dashboard", path: "/dashboard" },
   {
-    name: "Configurações",
+    name: "Configurations",
     path: "/configurations",
   },
   {
-    name: "View",
-    path: "/services",
-  },
-  {
-    name: "Logout",
-    path: "/logout",
+    name: "About",
+    path: "/about",
   },
 ];
 
@@ -37,16 +31,27 @@ export default function MenuBox({ currentPage }: MenuBoxProps) {
   const { user, logOut } = useContext(AuthContext);
 
   return (
-    <nav>
-      {navLinks.map((link, index) => {
-        return (
-          <ul key={`link_${index}`}>
-            <Link href={link.path}>
-              <li key={index}>{link.name}</li>
-            </Link>
-          </ul>
-        );
-      })}
-    </nav>
+    <div className={styles.container}>
+      <div className={styles.logo}>
+        <Image src={awsLogo} alt="AWS Logo" width={90} />
+      </div>
+
+      <ul>
+        {navLinks.map((link, index) => {
+          return (
+            <li key={`link_${index}`}>
+              <Link href={link.path}>{link.name}</Link>
+            </li>
+          );
+        })}
+      </ul>
+      <button
+        onClick={() => {
+          logOut();
+        }}
+      >
+        Logout
+      </button>
+    </div>
   );
 }

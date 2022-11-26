@@ -133,12 +133,17 @@ def register():
     req = flask.request.get_json(force=True)
     username = req.get('username', None)
     password = req.get('password', None)
+    aws_access_key_id = req.get('aws_access_key_id', None)
+    aws_secret_key = req.get('aws_secret_key', None)
+
     user = User.query.filter_by(username=username).first()
     if user:
         return {'message': 'User {} already exists'.format(username)}, 409
     db.session.add(User(
         username=username,
         password=guard.hash_password(password),
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_key=aws_secret_key,
         roles='user'
     ))
     db.session.commit()
@@ -187,7 +192,6 @@ def refresh():
        $ curl http://localhost:5000/api/refresh -X GET \
          -H "Authorization: Bearer <your_token>"
     """
-    print("refresh request")
     old_token = flask.request.get_data()
     new_token = guard.refresh_jwt_token(old_token)
     ret = {'access_token': new_token}
@@ -211,9 +215,7 @@ def create_terraform_config():
 
     region = req.get('region', None)
     json_config = req.get('json_config', None)
-    json_config = json.dumps(json_config)
 
-    # check if config already exists with same region
     config = TerraformConfig.query.filter_by(user_id=user_id, region=region).first()
     if config:
         return {'message': 'Config already exists for region {}'.format(region)}, 409
@@ -302,9 +304,6 @@ def delete_terraform_config(id):
 
     json_response = {'id': terraform_config.id, 'user_id': terraform_config.user_id, 'region': terraform_config.region, 'json_config': terraform_config.json_config}
 
-    db.session.delete(terraform_config)
-    db.session.commit()
-
     terraform_class = TerraformClass(
         user_id=user_id,
         region=json_response['region'],
@@ -314,6 +313,8 @@ def delete_terraform_config(id):
     )
     terraform_class.destroy()
 
+    db.session.delete(terraform_config)
+    db.session.commit()
 
 
     return {'message': 'TerraformConfig deleted'}, 200
@@ -350,7 +351,6 @@ def get_terraform_config(region_name):
     """
     user_id = flask_praetorian.current_user().id
 
-    print(user_id,region_name)
     terraform_config = TerraformConfig.query.filter_by(user_id=user_id, region=region_name).first()
     return {'id': terraform_config.id, 'user_id': terraform_config.user_id, 'region': terraform_config.region, 'json_config': terraform_config.json_config}, 200
 

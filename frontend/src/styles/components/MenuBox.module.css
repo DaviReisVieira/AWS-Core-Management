@@ -1,0 +1,61 @@
+.container {
+  position: fixed;
+  display: flex;
+  background-color: var(--orange);
+  width: 100vw;
+  height: 42px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.2rem 0;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container ul {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  align-self: center;
+}
+
+.container li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: var(--white);
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.container li:hover {
+  color: var(--black);
+}
+
+.container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  background-color: var(--aws-color);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: fit-content;
+  padding: 2px 20px 2px;
+  border-radius: 5px;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.container button:hover {
+  opacity: 0.9;
+}
