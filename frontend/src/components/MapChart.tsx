@@ -121,19 +121,19 @@ export default function MapChart({ regions }: any) {
               <circle r={3} fill="#232f3f" stroke="#fff" strokeWidth={2} />
               {showData && (
                 <text className={styles.tooltip}>
-                  <tspan x={5} y={+25}>
+                  <tspan x={15} y={+5}>
                     Região: {name}
                   </tspan>
-                  <tspan x={5} y={+35}>
+                  <tspan x={15} y={+15}>
                     Grupos de Usuários: {userGroup}
                   </tspan>
-                  <tspan x={5} y={+45}>
+                  <tspan x={15} y={+25}>
                     Usuários: {users}
                   </tspan>
-                  <tspan x={5} y={+55}>
+                  <tspan x={15} y={+35}>
                     Grupos de Segurança: {securityGroups}
                   </tspan>
-                  <tspan x={5} y={+65}>
+                  <tspan x={15} y={+45}>
                     Instâncias: {instances}
                   </tspan>
                 </text>

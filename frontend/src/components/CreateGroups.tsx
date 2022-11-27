@@ -2,29 +2,30 @@ import { useEffect, useState } from "react";
 
 import styles from "../styles/components/CreateUser.module.css";
 
-interface CreateUsersProps {
+interface CreateGroupsProps {
   newRegionInformations: RegionProps;
   setNewRegionInformations: (e: RegionProps) => void;
 }
 
-export default function CreateUsers({
+export default function CreateGroups({
   newRegionInformations,
   setNewRegionInformations,
-}: CreateUsersProps) {
+}: CreateGroupsProps) {
   const [name, setName] = useState<string>("");
+  const [groupId, setGroupId] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const [policies, setPolicies] = useState<PoliciesProps>({
     name: "",
     description: "",
     actions: [],
     resources: [],
   });
-  const [groups, setGroups] = useState<Array<any>>([]);
-  const [initialGroups, setInitialGroups] = useState<string>("");
   const [initialActions, setInitialActions] = useState<string>("");
   const [initialResources, setInitialResources] = useState<string>("");
 
   function handleUserCreate(e: any) {
     e.preventDefault();
+
     // check if actions and resources are not empty
     if (policies.actions.length === 0 && policies.resources.length === 0) {
       alert("Actions and Resources cannot be empty");
@@ -32,32 +33,37 @@ export default function CreateUsers({
     }
 
     const json_data = {
+      id: groupId,
       name,
+      description,
       policies,
-      user_groups_ids: groups,
     };
 
     console.log(json_data);
 
-    const newUsers = [...newRegionInformations.json_config.users, json_data];
+    const newUsersGroups = [
+      ...newRegionInformations.json_config.users_groups,
+      json_data,
+    ];
 
     setNewRegionInformations({
       ...newRegionInformations,
       json_config: {
         ...newRegionInformations.json_config,
-        users: newUsers,
+        users_groups: newUsersGroups,
       },
     });
 
     setName("");
+    setGroupId("");
+    setDescription("");
     setPolicies({
       name: "",
       description: "",
       actions: [],
       resources: [],
     });
-    setGroups([]);
-    setInitialGroups("");
+
     setInitialActions("");
     setInitialResources("");
   }
@@ -116,29 +122,19 @@ export default function CreateUsers({
     });
   };
 
-  let changePoliciesGroupsHandler = (e: any) => {
-    e.preventDefault();
-    setInitialGroups(e.target.value);
-  };
-
-  let addGroup = (event: any) => {
-    event.preventDefault();
-    if (initialGroups !== "") {
-      let newItem = initialGroups;
-      setGroups([...groups, newItem]);
-      setInitialGroups("");
-    }
-  };
-
-  let removeGroup = (par: number) => {
-    let newGroups = groups.filter((group, index) => index !== par);
-    setGroups(newGroups);
-  };
-
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Create User</h2>
+      <h2 className={styles.title}>Create User Group</h2>
       <form>
+        <h2>ID</h2>
+        <input
+          type="text"
+          name="ID"
+          id="ID"
+          value={groupId}
+          placeholder="ID of Group"
+          onChange={(e) => setGroupId(e.target.value)}
+        />
         <h2>Name</h2>
         <input
           type="text"
@@ -146,7 +142,16 @@ export default function CreateUsers({
           id="name"
           value={name}
           placeholder="Username"
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value.replace(/[^a-zA-Z0-9]/g, ""))}
+        />
+        <h2>Description</h2>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          value={description}
+          placeholder="Description"
+          onChange={(e) => setDescription(e.target.value)}
         />
         <h2>Policies</h2>
         <input
@@ -243,47 +248,6 @@ export default function CreateUsers({
                       onClick={(e) => {
                         e.preventDefault();
                         removeResource(index);
-                      }}
-                    >
-                      &#10060;
-                    </button>
-                    {name}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        <h2>Groups</h2>
-        <div id="parent_group">
-          <div id="container_group">
-            <div id="sub1_group">
-              <input
-                type="text"
-                value={initialGroups}
-                onChange={changePoliciesGroupsHandler}
-                placeholder="Add a item"
-                autoFocus
-              />
-              <button
-                id="add_group"
-                className={styles.alternativeButton}
-                onClick={addGroup}
-              >
-                +
-              </button>
-            </div>
-
-            <div id="sub2_group">
-              {groups.map((name, index) => {
-                return (
-                  <div id="cross_group" key={index}>
-                    <button
-                      className={styles.alternativeButton}
-                      id={`${index}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        removeGroup(index);
                       }}
                     >
                       &#10060;

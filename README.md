@@ -1,6 +1,29 @@
-# AWS-Core-Management
+# AWS Core Management
 
-AWS Core Management with Terraform
+![index](public/foto1.png)
+
+## Description
+
+This project is a simple example of how to use Terraform to manage AWS resources.
+
+## Technologies
+
+[![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/en/2.0.x/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Next.js](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+
+## Requirements
+
+- [Terraform](https://www.terraform.io/downloads.html)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [Python](https://www.python.org/downloads/)
+- [Node.js](https://nodejs.org/en/download/)
+<!-- - [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/) -->
+- [AWS Account](https://aws.amazon.com/)
+- [AWS IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 
 ## Format of variables in Terraform JSON
 
@@ -65,7 +88,7 @@ AWS Core Management with Terraform
 }
 ```
 
-## Format os JSON variable file
+## Format of JSON variable file
 
 ```json
 {

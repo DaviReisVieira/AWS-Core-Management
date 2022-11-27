@@ -16,7 +16,6 @@ interface InstancesProps {
   ami: string;
   instance_type: string;
   security_groups_ids: string[];
-  region: string;
 }
 
 interface PoliciesProps {
