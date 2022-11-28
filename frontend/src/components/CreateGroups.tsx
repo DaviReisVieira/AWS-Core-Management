@@ -25,9 +25,10 @@ export default function CreateGroups({
 
   function handleUserCreate(e: any) {
     e.preventDefault();
+    console.log(policies);
 
     // check if actions and resources are not empty
-    if (policies.actions.length === 0 && policies.resources.length === 0) {
+    if (policies.actions.length === 0 || policies.resources.length === 0) {
       alert("Actions and Resources cannot be empty");
       return;
     }

@@ -24,10 +24,14 @@ yarn dev &
 NEXT_PID=$!
 
 # wait for user to press enter
-read -p "Press enter to stop"
+read -p "PRESS ENTER TO STOP SERVERS"
 
 # kill flask
 kill $FLASK_PID
 
 # kill nextjs
 kill $NEXT_PID
+
+# kill all remaining processes
+killall python
+killall node

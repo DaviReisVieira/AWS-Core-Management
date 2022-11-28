@@ -15,20 +15,37 @@
 
 .components {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1;
   padding: 0rem 0;
-  align-items: baseline;
+  align-items: center;
+  margin: 10px;
+}
+
+.components h1 {
+  color: var(--white);
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2.5rem;
+  margin: 10px 0 10px;
 }
 
 .componentContainer {
+  display: flex;
+  flex-direction: column;
   background-color: var(--blue);
   border-radius: 5px;
   opacity: 0.8;
   margin: 5px;
   width: 100%;
   height: 100%;
+}
+
+.componentContainerList {
+  display: flex;
+  flex-direction: column;
 }
 
 .componentContainer h1 {

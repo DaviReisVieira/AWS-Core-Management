@@ -13,6 +13,15 @@
           "protocol": "tcp",
           "cidr_blocks": ["0.0.0.0/0"]
         }
+      ],
+      "egress": [
+        {
+          "description": "All",
+          "from_port": 0,
+          "to_port": 0,
+          "protocol": "-1",
+          "cidr_blocks": ["0.0.0.0/0"]
+        }
       ]
     }
   ],
@@ -21,8 +30,7 @@
       "name": "davirvs2_ubuntu2204",
       "ami": "ami-08c40ec9ead489470",
       "instance_type": "t2.micro",
-      "security_groups_ids": ["sg-0a1b2c3d"],
-      "region": "us-east-1a"
+      "security_groups_ids": ["sg-0a1b2c3d"]
     }
   ],
   "users": [

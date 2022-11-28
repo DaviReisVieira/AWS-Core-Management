@@ -1,14 +1,25 @@
+interface IngressProps {
+  description: string;
+  from_port: number;
+  to_port: number;
+  protocol: string;
+  cidr_blocks: string[];
+}
+
+interface EgressProps {
+  description: string;
+  from_port: number;
+  to_port: number;
+  protocol: string;
+  cidr_blocks: string[];
+}
+
 interface SecurityGroupProps {
   id: string;
   name: string;
   description: string;
-  ingress: {
-    description: string;
-    from_port: number;
-    to_port: number;
-    protocol: string;
-    cidr_blocks: string[];
-  };
+  ingress: IngressProps[];
+  egress: EgressProps[];
 }
 
 interface InstancesProps {

@@ -18,12 +18,19 @@ This project is a simple example of how to use Terraform to manage AWS resources
 
 - [Terraform](https://www.terraform.io/downloads.html)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-- [Python](https://www.python.org/downloads/)
+- [Python 3](https://www.python.org/downloads/)
 - [Node.js](https://nodejs.org/en/download/)
-<!-- - [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/) -->
+
 - [AWS Account](https://aws.amazon.com/)
 - [AWS IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
+
+## Usage
+
+Execute the `install.sh` script to install the dependencies.
+
+```bash
+$ ./install.sh
+```
 
 ## Format of variables in Terraform JSON
 
@@ -42,6 +49,15 @@ This project is a simple example of how to use Terraform to manage AWS resources
       "protocol": "tcp",
       "cidr_blocks": ["0.0.0.0/0"]
     }
+  ],
+  "egress": [
+    {
+      "description": "All",
+      "from_port": 0,
+      "to_port": 0,
+      "protocol": "-1",
+      "cidr_blocks": ["0.0.0.0/0"]
+    }
   ]
 }
 ```
@@ -53,8 +69,7 @@ This project is a simple example of how to use Terraform to manage AWS resources
   "name": "davirvs1_ubuntu2204",
   "ami": "ami-08c40ec9ead489470",
   "instance_type": "t2.micro",
-  "security_groups_ids": ["sg-0a1b2c3d"],
-  "region": "us-east-1a"
+  "security_groups_ids": ["sg-0a1b2c3d"]
 }
 ```
 

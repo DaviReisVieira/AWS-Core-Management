@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import CreateGroups from "../../components/CreateGroups";
+import CreateInstance from "../../components/CreateInstance";
 import CreateSecurityGroup from "../../components/CreateSecurityGroup";
 import CreateUsers from "../../components/CreateUsers";
 import Instances from "../../components/Instances";
@@ -27,24 +28,23 @@ export default function Region({ regionName }: RegionPageProps) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    async function getRegion() {
-      try {
-        const response = await api.get(`get-terraform-config/${regionName}`);
+  async function getRegion() {
+    try {
+      const response = await api.get(`get-terraform-config/${regionName}`);
 
-        const data = response.data;
+      const data = response.data;
 
-        setRegionInformations(data);
-        setNewRegionInformations(data);
-      } catch (err) {
-        console.log(err);
-      }
+      setRegionInformations(data);
+      setNewRegionInformations(data);
+    } catch (err) {
+      console.log(err);
     }
+  }
 
+  useEffect(() => {
     getRegion();
   }, [regionName]);
 
-  // check if newRegionInformations json_config is different from regionInformations json_config
   function checkIfDifferent() {
     if (
       JSON.stringify(newRegionInformations) ===
@@ -70,6 +70,8 @@ export default function Region({ regionName }: RegionPageProps) {
         console.log(err);
       }
       setLoading(false);
+
+      getRegion();
     }
   }
 
@@ -110,41 +112,75 @@ export default function Region({ regionName }: RegionPageProps) {
       <div className={styles.container}>
         <h1 className={styles.title}>{regionInformations?.region}</h1>
         <div className={styles.components}>
+          <h1>IAM Users</h1>
           <div className={styles.componentContainer}>
-            <h1>IAM Users</h1>
-            {newRegionInformations.json_config.users.map((user) => (
-              <Users key={user.name} {...user} />
-            ))}
+            <div className={styles.componentContainerList}>
+              {newRegionInformations.json_config.users.map((user) => (
+                <Users
+                  key={user.name}
+                  {...user}
+                  newRegionInformations={newRegionInformations}
+                  setNewRegionInformations={setNewRegionInformations}
+                />
+              ))}
+            </div>
             <CreateUsers
               newRegionInformations={newRegionInformations}
               setNewRegionInformations={setNewRegionInformations}
             />
           </div>
+          <h1>IAM User Groups</h1>
           <div className={styles.componentContainer}>
-            <h1>IAM Security Group</h1>
-            {newRegionInformations?.json_config.users_groups.map((ug) => (
-              <UsersGroups key={ug.id} {...ug} />
-            ))}
+            <div className={styles.componentContainerList}>
+              {newRegionInformations?.json_config.users_groups.map((ug) => (
+                <UsersGroups
+                  key={ug.id}
+                  {...ug}
+                  newRegionInformations={newRegionInformations}
+                  setNewRegionInformations={setNewRegionInformations}
+                />
+              ))}
+            </div>
             <CreateGroups
               newRegionInformations={newRegionInformations}
               setNewRegionInformations={setNewRegionInformations}
             />
           </div>
+          <h1>Security Groups</h1>
           <div className={styles.componentContainer}>
-            <h1>Security Groups</h1>
-            {regionInformations?.json_config.security_groups.map((sg) => (
-              <SecurityGroup key={sg.id} {...sg} />
-            ))}
+            <div className={styles.componentContainerList}>
+              {newRegionInformations.json_config.security_groups.map(
+                (security_group) => (
+                  <SecurityGroup
+                    key={security_group.name}
+                    {...security_group}
+                    newRegionInformations={newRegionInformations}
+                    setNewRegionInformations={setNewRegionInformations}
+                  />
+                )
+              )}
+            </div>
             <CreateSecurityGroup
               newRegionInformations={newRegionInformations}
               setNewRegionInformations={setNewRegionInformations}
             />
           </div>
+          <h1>Instances</h1>
           <div className={styles.componentContainer}>
-            <h1>Instances</h1>
-            {regionInformations?.json_config.instances.map((instance) => (
-              <Instances key={instance.name} {...instance} />
-            ))}
+            <div className={styles.componentContainerList}>
+              {newRegionInformations.json_config.instances.map((instance) => (
+                <Instances
+                  key={instance.name}
+                  {...instance}
+                  newRegionInformations={newRegionInformations}
+                  setNewRegionInformations={setNewRegionInformations}
+                />
+              ))}
+            </div>
+            <CreateInstance
+              newRegionInformations={newRegionInformations}
+              setNewRegionInformations={setNewRegionInformations}
+            />
           </div>
         </div>
         <div>

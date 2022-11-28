@@ -24,6 +24,12 @@ variable "security_groups" {
       protocol    = string
       cidr_blocks = list(string)
     }))
+    egress = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_blocks = list(string)
+    }))
   }))
 }
 
@@ -34,7 +40,6 @@ variable "instances" {
     ami                 = string
     instance_type       = string
     security_groups_ids = list(string)
-    region              = string
   }))
 }
 
