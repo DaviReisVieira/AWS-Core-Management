@@ -68,3 +68,11 @@
   padding: 10px;
   justify-content: space-between;
 }
+
+.securityContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  /* gap */
+  grid-gap: 15px;
+}

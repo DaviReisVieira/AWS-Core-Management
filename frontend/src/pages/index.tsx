@@ -80,7 +80,14 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          AWS Core <a>Management</a>
+          AWS Core{" "}
+          <a
+            target={"_blank"}
+            href="https://github.com/DaviReisVieira/AWS-Core-Management"
+            rel="noreferrer"
+          >
+            Management
+          </a>
         </h1>
         <div className={styles.bear}>
           <div className={styles.head}>

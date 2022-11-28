@@ -8,14 +8,10 @@ import { api } from "../services/api";
 import styles from "../styles/pages/About.module.css";
 
 export default function Configurations() {
-  const [mousePos, setMousePos] = useState<any>({});
+  const [mousePos, setMousePos] = useState<any>({ x: 0, y: 0 });
   const [windowDimensions, setWindowDimensions] = useState<any>({});
 
   useEffect(() => {
-    const handleMouseMove = (event: any) => {
-      setMousePos({ x: event.clientX, y: event.clientY });
-    };
-
     const getWindowDimensions = () => {
       const { innerWidth: width, innerHeight: height } = window;
       return {
@@ -28,46 +24,50 @@ export default function Configurations() {
       setWindowDimensions(getWindowDimensions());
     };
 
+    handleResize();
+
+    const handleMouseMove = (event: any) => {
+      setMousePos({ x: event.clientX, y: event.clientY });
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   function eye(): { x: number; y: number } {
-    let xPos = (mousePos.x * 33) / windowDimensions.width;
-    let yPos = (mousePos.y * 6) / windowDimensions.height;
+    let xPos = (mousePos.x * 38) / windowDimensions.width;
+    let yPos = (mousePos.y * 8) / windowDimensions.height;
     let x = 20;
     let y = 0;
 
-    if (xPos > 0 && xPos < 33) {
+    if (xPos > 0 && xPos < 38) {
       x = xPos;
-    } else if (xPos >= 33) {
-      x = 33;
+    } else if (xPos >= 38) {
+      x = 38;
     }
 
-    if (yPos > 0 && yPos < 6) {
+    if (yPos > 0 && yPos < 10) {
       y = yPos;
-    } else if (yPos >= 6) {
+    } else if (yPos >= 10) {
       y = 6;
     }
     return { x: -26 + x * 0.3, y: y };
   }
 
   function facial(): { x: number; y: number } {
-    let xPos = (mousePos.x * 33) / windowDimensions.width;
-    let yPos = (mousePos.y * 6) / windowDimensions.height;
+    let xPos = (mousePos.x * 38) / windowDimensions.width;
+    let yPos = (mousePos.y * 3) / windowDimensions.height;
 
     let x = 20;
     let y = 0;
 
-    if (xPos > 0 && xPos < 33) {
+    if (xPos > 0 && xPos < 38) {
       x = xPos;
-    } else if (xPos >= 33) {
-      x = 33;
+    } else if (xPos >= 38) {
+      x = 38;
     }
 
     if (yPos > 0 && yPos < 3) {
@@ -127,6 +127,17 @@ export default function Configurations() {
           Desenvolvimento utilizando NextJS, ReactJS, NodeJS, TypeScript,
           Terraform, Python e Flask API.
         </p>
+        <p className={styles.textInfo}>
+          Mais informações sobre o projeto podem ser encontradas em:
+        </p>
+        <a
+          className={styles.linkHere}
+          target={"_blank"}
+          href="https://github.com/DaviReisVieira/AWS-Core-Management"
+          rel="noreferrer"
+        >
+          GitHub do Projeto🖥️
+        </a>
       </main>
     </div>
   );

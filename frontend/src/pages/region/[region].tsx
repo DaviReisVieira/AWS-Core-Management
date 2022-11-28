@@ -25,6 +25,11 @@ export default function Region({ regionName }: RegionPageProps) {
   const [newRegionInformations, setNewRegionInformations] =
     useState<RegionProps>({} as RegionProps);
   const [loading, setLoading] = useState<boolean>(false);
+  const [createUserShow, setCreateUserShow] = useState<boolean>(false);
+  const [createGroupShow, setCreateGroupShow] = useState<boolean>(false);
+  const [createInstanceShow, setCreateInstanceShow] = useState<boolean>(false);
+  const [createSecurityGroupShow, setCreateSecurityGroupShow] =
+    useState<boolean>(false);
 
   const router = useRouter();
 
@@ -72,6 +77,12 @@ export default function Region({ regionName }: RegionPageProps) {
       setLoading(false);
 
       getRegion();
+      setCreateUserShow(false);
+      setCreateGroupShow(false);
+      setCreateInstanceShow(false);
+      setCreateSecurityGroupShow(false);
+
+      alert("Region updated successfully!");
     }
   }
 
@@ -110,9 +121,9 @@ export default function Region({ regionName }: RegionPageProps) {
       </Head>
       <MenuBox currentPage={"region"} />
       <div className={styles.container}>
-        <h1 className={styles.title}>{regionInformations?.region}</h1>
+        <h1 className={styles.title}>Region {regionInformations?.region}</h1>
         <div className={styles.components}>
-          <h1>IAM Users</h1>
+          <h1>IAM Users👾</h1>
           <div className={styles.componentContainer}>
             <div className={styles.componentContainerList}>
               {newRegionInformations.json_config.users.map((user) => (
@@ -124,12 +135,22 @@ export default function Region({ regionName }: RegionPageProps) {
                 />
               ))}
             </div>
-            <CreateUsers
-              newRegionInformations={newRegionInformations}
-              setNewRegionInformations={setNewRegionInformations}
-            />
+            {createUserShow && (
+              <CreateUsers
+                newRegionInformations={newRegionInformations}
+                setNewRegionInformations={setNewRegionInformations}
+              />
+            )}
+            {!createUserShow && (
+              <button
+                className={styles.createButton}
+                onClick={() => setCreateUserShow(true)}
+              >
+                Create User
+              </button>
+            )}
           </div>
-          <h1>IAM User Groups</h1>
+          <h1>IAM User Groups📚</h1>
           <div className={styles.componentContainer}>
             <div className={styles.componentContainerList}>
               {newRegionInformations?.json_config.users_groups.map((ug) => (
@@ -141,12 +162,22 @@ export default function Region({ regionName }: RegionPageProps) {
                 />
               ))}
             </div>
-            <CreateGroups
-              newRegionInformations={newRegionInformations}
-              setNewRegionInformations={setNewRegionInformations}
-            />
+            {createGroupShow && (
+              <CreateGroups
+                newRegionInformations={newRegionInformations}
+                setNewRegionInformations={setNewRegionInformations}
+              />
+            )}
+            {!createGroupShow && (
+              <button
+                className={styles.createButton}
+                onClick={() => setCreateGroupShow(true)}
+              >
+                Create User Group
+              </button>
+            )}
           </div>
-          <h1>Security Groups</h1>
+          <h1>Security Groups🔐</h1>
           <div className={styles.componentContainer}>
             <div className={styles.componentContainerList}>
               {newRegionInformations.json_config.security_groups.map(
@@ -160,12 +191,22 @@ export default function Region({ regionName }: RegionPageProps) {
                 )
               )}
             </div>
-            <CreateSecurityGroup
-              newRegionInformations={newRegionInformations}
-              setNewRegionInformations={setNewRegionInformations}
-            />
+            {createSecurityGroupShow && (
+              <CreateSecurityGroup
+                newRegionInformations={newRegionInformations}
+                setNewRegionInformations={setNewRegionInformations}
+              />
+            )}
+            {!createSecurityGroupShow && (
+              <button
+                className={styles.createButton}
+                onClick={() => setCreateSecurityGroupShow(true)}
+              >
+                Create Security Group
+              </button>
+            )}
           </div>
-          <h1>Instances</h1>
+          <h1>Instances🖥️</h1>
           <div className={styles.componentContainer}>
             <div className={styles.componentContainerList}>
               {newRegionInformations.json_config.instances.map((instance) => (
@@ -177,10 +218,20 @@ export default function Region({ regionName }: RegionPageProps) {
                 />
               ))}
             </div>
-            <CreateInstance
-              newRegionInformations={newRegionInformations}
-              setNewRegionInformations={setNewRegionInformations}
-            />
+            {createInstanceShow && (
+              <CreateInstance
+                newRegionInformations={newRegionInformations}
+                setNewRegionInformations={setNewRegionInformations}
+              />
+            )}
+            {!createInstanceShow && (
+              <button
+                className={styles.createButton}
+                onClick={() => setCreateInstanceShow(true)}
+              >
+                Create Instance
+              </button>
+            )}
           </div>
         </div>
         <div>

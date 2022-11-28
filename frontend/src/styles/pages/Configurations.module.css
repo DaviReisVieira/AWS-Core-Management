@@ -2,6 +2,7 @@
   background-color: var(--aws-color);
   width: 100vw;
   height: 100vh;
+  display: flex;
 }
 
 .main {
@@ -62,7 +63,7 @@
 
 .bear {
   position: relative;
-  margin: 5px auto;
+  margin: 25px auto;
   width: 120px;
   height: 120px;
   background-color: var(--orange);

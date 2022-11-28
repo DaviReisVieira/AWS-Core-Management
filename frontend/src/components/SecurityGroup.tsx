@@ -46,9 +46,9 @@ export default function SecurityGroup(instance: SecurityGroupComponentProps) {
           <h2>{instance.id}</h2>
         </div>
       </div>
-      <div>
-        <h2>Ingress</h2>
+      <div className={styles.securityContainer}>
         <div className={styles.ingressEgress}>
+          <h2>Ingress</h2>
           {instance.ingress.map((ingress, index) => (
             <div
               key={`ingress_${index}`}
@@ -78,8 +78,8 @@ export default function SecurityGroup(instance: SecurityGroupComponentProps) {
           ))}
         </div>
         <div>
-          <h2>Egress</h2>
           <div className={styles.ingressEgress}>
+            <h2>Egress</h2>
             {instance.egress.map((egress, index) => (
               <div
                 key={`ingress_${index}`}

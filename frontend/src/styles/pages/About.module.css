@@ -4,6 +4,28 @@
   height: 100vh;
 }
 
+.linkHere {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  background-color: var(--orange);
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+
+  margin: 0px;
+  opacity: 1;
+
+  transition: opacity 0.2s;
+}
+
+.linkHere:hover {
+  opacity: 0.8;
+}
+
 .main {
   min-height: 100vh;
   padding: 2rem 0;
@@ -70,7 +92,7 @@
 
 .bear {
   position: relative;
-  margin: 5px auto;
+  margin: 25px auto;
   width: 120px;
   height: 120px;
   background-color: var(--orange);

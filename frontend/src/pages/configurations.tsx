@@ -5,7 +5,7 @@ import { useState } from "react";
 import MenuBox from "../components/MenuBox";
 import { api } from "../services/api";
 
-import styles from "../styles/pages/Register.module.css";
+import styles from "../styles/pages/Configurations.module.css";
 
 export default function Configurations() {
   const [message, setMessage] = useState("");

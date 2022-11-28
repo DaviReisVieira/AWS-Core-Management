@@ -38,7 +38,9 @@ export default function MenuBox({ currentPage }: MenuBoxProps) {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <Image src={awsLogo} alt="AWS Logo" width={90} />
+        <Link href="/dashboard" passHref>
+          <Image src={awsLogo} alt="AWS Logo" width={90} />
+        </Link>
       </div>
 
       <ul>

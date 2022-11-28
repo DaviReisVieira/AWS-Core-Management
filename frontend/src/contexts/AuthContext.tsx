@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import Router from "next/router";
-import { parseCookies, setCookie } from "nookies";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { createContext, ReactChild, useEffect, useState } from "react";
 import { api } from "../services/api";
 
@@ -76,9 +76,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   async function logOut() {
     console.log("logout");
     setUser(null);
-    setCookie(undefined, "awsCoreManagement.accessToken", "", {
-      maxAge: 0,
-    });
+    destroyCookie(undefined, "awsCoreManagement.accessToken");
+
     Router.push("/");
   }
 
