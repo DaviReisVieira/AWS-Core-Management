@@ -35,14 +35,35 @@ export default function SecurityGroup(instance: SecurityGroupComponentProps) {
       <div>
         <h2>ID: {instance.id}</h2>
         <h2>Name: {instance.name}</h2>
+        <h2>Description: {instance.description}</h2>
       </div>
       <div>
-        <h2>Description: {instance.description}</h2>
-        <h2></h2>
+        <h2>Ingress</h2>
+        {instance.ingress.map((ingress, index) => (
+          <div key={`ingress_${index}`}>
+            <h2>Description: {ingress.description}</h2>
+            <h2>Protocol: {ingress.protocol}</h2>
+            <h2>
+              Port: {ingress.from_port}-{ingress.to_port}
+            </h2>
+            <h2>Cidr Blocks: {ingress.cidr_blocks.toString()}</h2>
+          </div>
+        ))}
       </div>
-      <button onClick={deleteInstanceFromSecurityGroupGroups}>
-        Delete Instance
-      </button>
+      <div>
+        <h2>Egress</h2>
+        {instance.egress.map((egress, index) => (
+          <div key={`ingress_${index}`}>
+            <h2>Description: {egress.description}</h2>
+            <h2>Protocol: {egress.protocol}</h2>
+            <h2>
+              Port: {egress.from_port}-{egress.to_port}
+            </h2>
+            <h2>Cidr Blocks: {egress.cidr_blocks.toString()}</h2>
+          </div>
+        ))}
+      </div>
+      <button onClick={deleteInstanceFromSecurityGroupGroups}>Delete SG</button>
     </div>
   );
 }
