@@ -258,16 +258,22 @@ export default function CreateUsers({
         <div id="parent_group">
           <div id="container_group">
             <div id="sub1_group">
-              <input
-                type="text"
+              <select
+                name="add_group"
+                id="add_group"
                 value={initialGroups}
                 onChange={changePoliciesGroupsHandler}
-                placeholder="Add a item"
-                autoFocus
-              />
+              >
+                <option value="">Select a Group</option>
+                {newRegionInformations.json_config.users_groups.map((sg) => (
+                  <option key={`us_s_${sg.id}`} value={sg.id}>
+                    {sg.name}
+                  </option>
+                ))}
+              </select>
               <button
-                id="add_group"
                 className={styles.alternativeButton}
+                id="add_group"
                 onClick={addGroup}
               >
                 +

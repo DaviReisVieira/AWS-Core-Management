@@ -20,6 +20,16 @@
   margin: 2px 0 2px;
 }
 
+.container select {
+  background-color: #fff;
+  color: #000;
+  width: 90%;
+  height: 30px;
+  margin: 2px 0 2px;
+  /* center text */
+  text-align-last: center;
+}
+
 .removeButton {
   background-color: #fff;
   color: #000;

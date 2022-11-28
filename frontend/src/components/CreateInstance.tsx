@@ -125,13 +125,21 @@ export default function CreateInstance({
           <div id="parent_action">
             <div id="container_action">
               <div id="sub1_action">
-                <input
-                  type="text"
+                <select
+                  name="instance_sg"
+                  id="instance_sg"
                   value={initialsecurityGroupsIds}
                   onChange={changePoliciesActionsHandler}
-                  placeholder="Add a item"
-                  autoFocus
-                />
+                >
+                  <option value="">Select a Security Group</option>
+                  {newRegionInformations.json_config.security_groups.map(
+                    (sg) => (
+                      <option key={`sg_s_${sg.id}`} value={sg.id}>
+                        {sg.name}
+                      </option>
+                    )
+                  )}
+                </select>
                 <button
                   className={styles.alternativeButton}
                   id="add_action"

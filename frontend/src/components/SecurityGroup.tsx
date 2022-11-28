@@ -3,7 +3,7 @@ interface SecurityGroupComponentProps extends SecurityGroupProps {
   setNewRegionInformations: (e: RegionProps) => void;
 }
 
-import styles from "../styles/components/Users.module.css";
+import styles from "../styles/components/SecurityGroups.module.css";
 
 export default function SecurityGroup(instance: SecurityGroupComponentProps) {
   function deleteInstanceFromSecurityGroupGroups(e: any) {
@@ -32,36 +32,83 @@ export default function SecurityGroup(instance: SecurityGroupComponentProps) {
 
   return (
     <div className={styles.container}>
-      <div>
-        <h2>ID: {instance.id}</h2>
-        <h2>Name: {instance.name}</h2>
-        <h2>Description: {instance.description}</h2>
+      <div className={styles.informations}>
+        <div>
+          <h2>Name</h2>
+          <h2>{instance.name}</h2>
+        </div>
+        <div>
+          <h2>Description</h2>
+          <h2>{instance.description}</h2>
+        </div>
+        <div>
+          <h2>Security Group ID</h2>
+          <h2>{instance.id}</h2>
+        </div>
       </div>
       <div>
         <h2>Ingress</h2>
-        {instance.ingress.map((ingress, index) => (
-          <div key={`ingress_${index}`}>
-            <h2>Description: {ingress.description}</h2>
-            <h2>Protocol: {ingress.protocol}</h2>
-            <h2>
-              Port: {ingress.from_port}-{ingress.to_port}
-            </h2>
-            <h2>Cidr Blocks: {ingress.cidr_blocks.toString()}</h2>
+        <div className={styles.ingressEgress}>
+          {instance.ingress.map((ingress, index) => (
+            <div
+              key={`ingress_${index}`}
+              className={styles.ingressEgressContainer}
+            >
+              <div>
+                <h2>Description</h2>
+                <h2>{ingress.description}</h2>
+              </div>
+              <div>
+                <h2>Protocol</h2>
+                <h2>{ingress.protocol}</h2>
+              </div>
+              <div>
+                <h2>From Port</h2>
+                <h2>{ingress.from_port}</h2>
+              </div>
+              <div>
+                <h2>To Port</h2>
+                <h2>{ingress.to_port}</h2>
+              </div>
+              <div>
+                <h2>Cidr Blocks</h2>
+                <h2>{ingress.cidr_blocks.toString()}</h2>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h2>Egress</h2>
+          <div className={styles.ingressEgress}>
+            {instance.egress.map((egress, index) => (
+              <div
+                key={`ingress_${index}`}
+                className={styles.ingressEgressContainer}
+              >
+                <div>
+                  <h2>Description</h2>
+                  <h2>{egress.description}</h2>
+                </div>
+                <div>
+                  <h2>Protocol</h2>
+                  <h2>{egress.protocol}</h2>
+                </div>
+                <div>
+                  <h2>From Port</h2>
+                  <h2>{egress.from_port}</h2>
+                </div>
+                <div>
+                  <h2>To Port</h2>
+                  <h2>{egress.to_port}</h2>
+                </div>
+                <div>
+                  <h2>Cidr Blocks</h2>
+                  <h2>{egress.cidr_blocks.toString()}</h2>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div>
-        <h2>Egress</h2>
-        {instance.egress.map((egress, index) => (
-          <div key={`ingress_${index}`}>
-            <h2>Description: {egress.description}</h2>
-            <h2>Protocol: {egress.protocol}</h2>
-            <h2>
-              Port: {egress.from_port}-{egress.to_port}
-            </h2>
-            <h2>Cidr Blocks: {egress.cidr_blocks.toString()}</h2>
-          </div>
-        ))}
+        </div>
       </div>
       <button onClick={deleteInstanceFromSecurityGroupGroups}>Delete SG</button>
     </div>

@@ -25,6 +25,7 @@ variable "security_groups" {
       cidr_blocks = list(string)
     }))
     egress = list(object({
+      description = string
       from_port   = number
       to_port     = number
       protocol    = string
