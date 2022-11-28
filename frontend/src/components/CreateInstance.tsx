@@ -45,29 +45,33 @@ export default function CreateInstance({
   function handleUserCreate(e: any) {
     e.preventDefault();
 
-    const json_data = {
-      name,
-      ami: amiList[newRegionInformations.region],
-      instance_type: instanceType,
-      security_groups_ids: securityGroupsIds,
-    };
+    if (securityGroupsIds.length > 0) {
+      const json_data = {
+        name,
+        ami: amiList[newRegionInformations.region],
+        instance_type: instanceType,
+        security_groups_ids: securityGroupsIds,
+      };
 
-    const newUsersGroups = [
-      ...newRegionInformations.json_config.instances,
-      json_data,
-    ];
+      const newUsersGroups = [
+        ...newRegionInformations.json_config.instances,
+        json_data,
+      ];
 
-    setNewRegionInformations({
-      ...newRegionInformations,
-      json_config: {
-        ...newRegionInformations.json_config,
-        instances: newUsersGroups,
-      },
-    });
+      setNewRegionInformations({
+        ...newRegionInformations,
+        json_config: {
+          ...newRegionInformations.json_config,
+          instances: newUsersGroups,
+        },
+      });
 
-    setName("");
-    setInstanceType("");
-    setSecurityGroupsIds([]);
+      setName("");
+      setInstanceType("");
+      setSecurityGroupsIds([]);
+    } else {
+      alert("You must select at least one security group");
+    }
   }
 
   let changePoliciesActionsHandler = (e: any) => {

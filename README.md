@@ -31,7 +31,22 @@ Execute the `install.sh` script to install the dependencies and configure the in
 $ ./install.sh
 ```
 
-Abra seu navegador e acesse o endereço `http://localhost:3000` para visualizar a aplicação.
+Open your browser and go to the URL `http://localhost:3000`. You should see the following page:
+
+## Tutorial
+
+1. Register in the plataform with username, password, AWS Access Key ID and AWS Secret Access Key.
+   ![Tutorial 1](public/tutorial1.png)
+2. After registering, you will be redirected to the login page. Log in with the username and password you registered.
+   ![Tutorial 2](public/tutorial2.png)
+3. After logging in, you will be redirected to the home page. Here you can see the AWS regions. Create a new region by clicking on the `Create` button after selecting the region you want to create.
+   ![Tutorial 3](public/tutorial3.png)
+4. You can select a specific region by clicking on the region name. Here you can see the AWS resources.
+   ![Tutorial 4](public/tutorial4.png)
+5. Create a new resource by clicking on the `Create` button after selecting the resource you want to create.
+   ![Tutorial 5](public/tutorial5.png)
+6. Update the region configuration by clicking on the `Update Region`.
+   ![Tutorial 6](public/tutorial6.png)
 
 ## Concepts
 
