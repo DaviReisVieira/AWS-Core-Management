@@ -20,17 +20,48 @@ This project is a simple example of how to use Terraform to manage AWS resources
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - [Python 3](https://www.python.org/downloads/)
 - [Node.js](https://nodejs.org/en/download/)
-
 - [AWS Account](https://aws.amazon.com/)
 - [AWS IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 
 ## Usage
 
-Execute the `install.sh` script to install the dependencies.
+Execute the `install.sh` script to install the dependencies and configure the infrastructure.
 
 ```bash
 $ ./install.sh
 ```
+
+## Concepts
+
+### Conceito C+
+
+Criar:
+
+- [x] VPC criação de uma VPC e sub-rede; instâncias: esta funcionalidade deverá permitir a escolha de pelo menos 2 tipos de configuração de hosts; ainda deverá ser possível aumentar e diminuir a quantidade de instâncias; security group: criação e a associação de grupos de segurança com instâncias; Usuário no IAM.
+
+Deletar:
+
+- [x] Instâncias, grupos de segurança e usuário.
+
+Listar:
+
+- [x] Aplicação deverá listar todas instâncias e suas regiões, usuários, grupos de segurança e suas regras.
+
+### Conceito B
+
+Criar:
+
+- [x] Regras em security group; Instância em mais de uma região; Associar algum tipo de restrição de acesso a um usuário;
+
+Deletar:
+
+- [x] Regras de security group; recursos implantados na Região;
+
+### Conceito A
+
+Criar:
+
+- [x] Criar um HA de servidores web.
 
 ## Format of variables in Terraform JSON
 

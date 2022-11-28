@@ -19,10 +19,13 @@ data "template_file" "user_data" {
 data "aws_ami" "ubuntu" {
   most_recent = true
 
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
-  }
+    # amazon linux 2
+    filter {
+        name   = "name"
+        values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+        }
+    owners = ["amazon"]
+
 }
 
 resource "aws_launch_configuration" "webcluster" {

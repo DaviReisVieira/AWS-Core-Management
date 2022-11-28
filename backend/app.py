@@ -73,7 +73,7 @@ app = flask.Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = 'top_secret'
 app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
-app.config['JWT_REFRESH_LIFESPAN'] = {'days': 7}
+app.config['JWT_REFRESH_LIFESPAN'] = {'days': 1}
 
 # Initialize the flask-praetorian instance for the app
 guard.init_app(app, User)
