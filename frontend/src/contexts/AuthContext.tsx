@@ -74,6 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function logOut() {
+    console.log("logout");
     setUser(null);
     setCookie(undefined, "awsCoreManagement.accessToken", "", {
       maxAge: 0,

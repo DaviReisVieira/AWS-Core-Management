@@ -28,7 +28,12 @@ const navLinks = [
 ];
 
 export default function MenuBox({ currentPage }: MenuBoxProps) {
-  const { user, logOut } = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
+
+  async function handleLogout(e: any) {
+    e.preventDefault();
+    await logOut();
+  }
 
   return (
     <div className={styles.container}>
@@ -46,8 +51,8 @@ export default function MenuBox({ currentPage }: MenuBoxProps) {
         })}
       </ul>
       <button
-        onClick={() => {
-          logOut();
+        onClick={(e) => {
+          handleLogout(e);
         }}
       >
         Logout

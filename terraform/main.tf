@@ -39,3 +39,11 @@ module "groups" {
 output "groups" {
   value = module.groups
 }
+
+module "autoscaling" {
+  source = "./autoscaling"
+}
+
+output "autoscaling" {
+  value = module.autoscaling
+}

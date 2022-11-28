@@ -76,7 +76,6 @@ export default function Dashboard() {
     };
 
     try {
-      console.log(newRegionName, json_data);
       if (newRegionName == "") {
         alert("Please, enter a region name");
         return;

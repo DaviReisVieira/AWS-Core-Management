@@ -51,7 +51,6 @@ export default function MapChart({ regions }: any) {
     });
 
     setMarkers(markers);
-    console.log(markers);
   }, [regions]);
 
   return (

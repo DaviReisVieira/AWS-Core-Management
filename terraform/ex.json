@@ -1,0 +1,7 @@
+{
+  "aws_region": "us-west-1",
+  "security_groups": [],
+  "instances": [],
+  "users": [],
+  "users_groups": []
+}
