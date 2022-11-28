@@ -31,6 +31,8 @@ Execute the `install.sh` script to install the dependencies and configure the in
 $ ./install.sh
 ```
 
+Abra seu navegador e acesse o endereço `http://localhost:3000` para visualizar a aplicação.
+
 ## Concepts
 
 ### Conceito C+
